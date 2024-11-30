@@ -1,4 +1,4 @@
-<{if $block.category && $block.category.image_path != ''}>
+<{if $block.category && $block.category.image_path|default:'' != ''}>
     <div align="center">
         <a href="<{$block.category.categoryurl}>" title="<{$block.category.name}>">
             <img src="<{$block.category.image_path}>" width="185" height="80" alt="<{$block.category.name}>">
@@ -8,13 +8,13 @@
 
 
 <{if $block.display_type=='block'}>
-    <{foreach item=item from=$block.items}>
+    <{foreach item=item from=$block.items|default:null}>
         <{include file="db:publisher_singleitem_block.tpl" item=$item}>
     <{/foreach}>
 
 <{else}>
-    <{foreach item=item from=$block.items name=spotlight}>
-        <{if $item.summary != ''}>
+    <{foreach item=item from=$block.items|default:null name=spotlight}>
+        <{if $item.summary|default:'' != ''}>
             <div class="spot_publisher_items_list">
                 <div class="article_wf_title">
                     <h3><{$item.titlelink}></h3>

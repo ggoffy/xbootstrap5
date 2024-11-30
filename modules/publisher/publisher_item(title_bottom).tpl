@@ -30,7 +30,7 @@
                     <div class="item">
                         <img class="img-fluid" src="<{$item.image_path}>">
                     </div>
-                    <{foreach item=image from=$item.images}>
+                    <{foreach item=image from=$item.images|default:null}>
                         <div class="item">
                             <img class="img-fluid" src="<{$image.path}>" alt="<{$image.name}>">
                         </div>
@@ -70,7 +70,7 @@
 <{/if}>
 <div class="clearfix"></div>
 <div class="pub_article_extras">
-    <{if $rating_enabled}>
+    <{if isset($rating_enabled)}>
         <div class="">
             <small><{$item.ratingbar}></small>
         </div>
@@ -81,7 +81,7 @@
     <div class="clearfix"></div>
 </div>
 
-<{if $itemfooter}>
+<{if isset($itemfooter)}>
     <div class="card-footer">
         <small><{$itemfooter}></small>
     </div>
@@ -91,7 +91,7 @@
 <!-- Attached Files -->
 <{if $item.files}>
 
-    <{foreach item=file from=$item.files}>
+    <{foreach item=file from=$item.files|default:null}>
 
     <{/foreach}>
     <table class="table table-bordered table-sm" style="margin: 15px 0;">
@@ -112,7 +112,7 @@
                         <img src="<{$publisher_url}>/assets/images/links/delete.png" title="<{$smarty.const._CO_PUBLISHER_DELETEFILE}>" alt="<{$smarty.const._CO_PUBLISHER_DELETEFILE}>"></a>
                 <{/if}>
                 <a href="<{$publisher_url}>/visit.php?fileid=<{$file.fileid}>" target="_blank">
-                    <img src="<{$publisher_url}>/assets/images/links/file.gif" title="<{$lang_download_file}>" alt="<{$smarty.const._MD_PUBLISHER_DOWNLOAD_FILE}>">&nbsp;<strong><{$file.name}></strong>
+                    <img src="<{$publisher_url}>/assets/images/links/file.gif" title="<{$lang_download_file|default:''}>" alt="<{$smarty.const._MD_PUBLISHER_DOWNLOAD_FILE}>">&nbsp;<strong><{$file.name}></strong>
                 </a>
 
                 <div style="font-size:12px;"><{$file.description}></div>
@@ -127,7 +127,7 @@
 <!-- End Attached Files -->
 
 <!-- Items by same Author -->
-<{if $perm_author_items && $item.uid != 0}>
+<{if $perm_author_items && $item.uid|default:0 != 0}>
     <div class="pub_article_extras">
         <div class="btn btn-primary btn-lg w-100">
             <a href="<{$publisher_url}>/author_items.php?uid=<{$item.uid}>">
@@ -141,7 +141,7 @@
 <!-- Other articles in the category -->
 <{if $other_items == "previous_next"}>
     <{if $previous_item_link || $next_item_link}>
-        <{if $previous_item_link}>
+        <{if isset($previous_item_link)}>
             <div class="">
                 <a href="<{$previous_item_url}>">
                     <img style="vertical-align: middle;" src="<{$publisher_images_url}>/links/previous.gif" title="<{$smarty.const._MD_PUBLISHER_PREVIOUS_ITEM}>" alt="<{$smarty.const._MD_PUBLISHER_PREVIOUS_ITEM}>">
@@ -149,7 +149,7 @@
                 <{$previous_item_link}>
             </div>
         <{/if}>
-        <{if $next_item_link}>
+        <{if isset($next_item_link)}>
             <div class="text-end">
                 <{$next_item_link}>
                 <a href="<{$next_item_url}>">
@@ -167,7 +167,7 @@
 
     <{/if}>
 
-    <{foreach item=item from=$items}>
+    <{foreach item=item from=$items|default:null}>
 
         <{if $display_date_col == 1}>
 
@@ -197,7 +197,7 @@
 <{/if}>
 <!-- END Other articles in the category -->
 
-<{if $tagbar}>
+<{if $tagbar|default:false}>
     <p><{include file="db:tag_bar.tpl"}></p>
 <{/if}>
 

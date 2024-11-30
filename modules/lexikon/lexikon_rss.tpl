@@ -5,13 +5,13 @@
         <link><{$channel_link}>
         <description><{$channel_desc}></description>
         <lastbuilddate><{$channel_lastbuild}></lastbuilddate>
-        <docs>http://backend.userland.com/rss/</docs>
+        <docs>https://backend.userland.com/rss/</docs>
         <generator><{$channel_generator}></generator>
         <category><{$channel_category}></category>
         <managingeditor><{$channel_editor}></managingeditor>
         <webmaster><{$channel_webmaster}></webmaster>
         <language><{$channel_language}></language>
-        <{if $image_url != ""}>
+        <{if $image_url|default:'' != ''}>
             <img>
             <title><{$channel_title}></title>
             <url><{$image_url}></url>
@@ -20,7 +20,7 @@
             <width><{$image_width}></width>
             <height><{$image_height}></height>
         <{/if}>
-        <{foreach item=item from=$items}>
+        <{foreach item=item from=$items|default:null}>
             <item>
                 <title><{$item.title}></title>
                 <link><{$item.link}>

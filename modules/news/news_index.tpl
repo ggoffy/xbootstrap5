@@ -11,15 +11,15 @@
         </div>
     <{/if}>
 
-    <{if $topic_description != ""}>
+    <{if $topic_description|default:'' != ''}>
         <{$topic_description}>
     <{/if}>
 
     <div id="xoopsgrid" class="row">
         <{section name=i loop=$columns}>
-            <{foreach item=story from=$columns[i]}>
+            <{foreach item=story from=$columns[i]|default:null}>
                 <div class="col-xs-12 col-md-6 home-news-loop">
-                    <{if $story.picture != ""}>
+                    <{if $story.picture|default:'' != ''}>
                         <div class="home-thumbnails">
                             <img src="<{$story.picture}>" alt="<{$story.pictureinfo}>" class="img-fluid">
                         </div>
@@ -40,7 +40,7 @@
     </div>
 
     <div class="text-center generic-pagination">
-        <{$pagenav}>
+        <{$pagenav|default:''}>
     </div>
 
 </div>

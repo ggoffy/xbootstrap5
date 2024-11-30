@@ -49,12 +49,12 @@
     <script src="<{xoImgUrl}>js/imagesloaded.pkgd.min.js"></script>
 
     <!--[if lt IE 9]>
-<script src="http://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="http://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <script src="<{xoImgUrl}>js/selectivizr-min.js"></script>
 <![endif]-->
     <script src="<{xoImgUrl}>js/js.js"></script>
-    <link rel="alternate" type="application/rss+xml" title="" href="<{xoAppUrl backend.php}>">
+    <link rel="alternate" type="application/rss+xml" title="" href="<{xoAppUrl 'backend.php'}>">
 
     <title><{if $xoops_dirname == "system"}><{$xoops_sitename}><{if $xoops_pagetitle !=''}> - <{$xoops_pagetitle}><{/if}><{else}><{if $xoops_pagetitle !=''}><{$xoops_pagetitle}> - <{$xoops_sitename}><{/if}><{/if}></title>
 
@@ -67,8 +67,8 @@
 <body id="<{$xoops_dirname}>">
 
 <{include file="$theme_name/tpl/nav-menu.tpl"}>
-
 <{include file="$theme_name/tpl/slider.tpl"}>
+
 <div class="container maincontainer">
     <a id="stickyMenuHere"></a>
     <{if $xoops_page == "index"}>
@@ -81,9 +81,13 @@
                 <p><a href="javascript:;" class="btn btn-md btn-success"><{$smarty.const.THEME_LEARNINGMORE}></a></p>
             </div>
 
-            <{if $xoops_banner != ""}>
+            <{if $xoops_banner|default:'' != ''}>
                 <div class="col-md-6">
-                <div class="xoops-banner"><{$xoops_banner}></div></div><{/if}>
+                    <div class="xoops-banner">
+                        <{$xoops_banner}>
+                    </div>
+                </div>
+            <{/if}>
 
         </div>
         <!-- .home-message -->

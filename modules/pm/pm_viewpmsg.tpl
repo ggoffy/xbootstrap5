@@ -103,12 +103,12 @@
             <{else}>
                 <span class="fa fa-envelope btn btn-xs btn-warning" title="<{$smarty.const._PM_NOTREAD}>"></span>
             <{/if}>
-            <{if $message.msg_image != ""}>
+            <{if $message.msg_image|default:'' != ''}>
                 <img src="<{$xoops_url}>/images/subject/<{$message.msg_image}>" alt="">
             <{/if}>
         </div>
         <div class="col-xs-2 col-md-2">
-            <{if $message.postername != ""}>
+            <{if $message.postername|default:'' != ''}>
                 <a href="<{$xoops_url}>/userinfo.php?uid=<{$message.posteruid}>" title=""><{$message.postername}></a>
             <{else}>
                 <{$anonymous}>
@@ -129,13 +129,13 @@
 <{/foreach}>
 
 <{$pmform.elements.send.body}>
-<{if $display}>
+<{if isset($display)}>
     <{$pmform.elements.move_messages.body}>
     <{$pmform.elements.delete_messages.body}>
     <{$pmform.elements.empty_messages.body}>
 <{/if}>
 
-<{foreach item=element from=$pmform.elements}>
+<{foreach item=element from=$pmform.elements|default:null}>
     <{if $element.hidden == 1}>
         <{$element.body}>
     <{/if}>
